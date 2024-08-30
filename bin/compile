@@ -49,16 +49,15 @@ then
 fi
 
 # install bun
-export BUN_INSTALL=$BUILD_DIR/.heroku
-export BUN_DIR=$BUILD_DIR/.heroku/cache
-curl -fsSL https://bun.sh/install | bash $BUN_INSTALL_VERSION
+export BUN_INSTALL=$BUILD_DIR/.heroku/bun
 export PATH="$BUN_INSTALL/bin:$PATH"
+curl -fsSL https://bun.sh/install | bash $BUN_INSTALL_VERSION
 
 # set environment variables
 PROFILE_PATH="$BUILD_DIR/.profile.d/bun.sh"
 mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$HOME/.heroku/bin:$PATH"' >> $PROFILE_PATH
-echo 'export BUN_DIR="$HOME/.heroku/cache"' >> $PROFILE_PATH
+echo 'export BUN_INSTALL="$HOME/.heroku/bun"' >> $PROFILE_PATH
+echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $PROFILE_PATH
 
 echo "Installed Bun v$(bun --version)"
 
