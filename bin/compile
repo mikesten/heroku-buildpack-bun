@@ -94,3 +94,10 @@ then
   bun run heroku-postbuild
 fi
 
+# Create an export file for other buildpacks
+cat << EOF > "$BP_DIR/export"
+export BUN_INSTALL="$HOME/.heroku/bun"
+export PATH="$HOME/.heroku/bun/bin:\$PATH"
+EOF
+
+echo "Created export file for subsequent buildpacks"
